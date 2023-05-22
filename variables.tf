@@ -5,3 +5,7 @@ variable "access_key" {
 variable "access_secret" {
   description = "AWS Access secret"
 }
+
+variable "pgp_key" {
+  default = ""
+}
