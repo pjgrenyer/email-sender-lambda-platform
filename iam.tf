@@ -46,11 +46,6 @@ resource "aws_iam_user" "email_sender_lambda_deploy" {
   force_destroy = true
 }
 
-resource "aws_iam_access_key" "email_sender_lambda_deploy" {
-  user    = aws_iam_user.email_sender_lambda_deploy.name
-  pgp_key = var.pgp_key
-}
-
 resource "aws_iam_user_policy" "lambda_s3_deploy_policy" {
   name = "EmailSenderLambdaS3DeployPolicy"
   user = aws_iam_user.email_sender_lambda_deploy.id
@@ -90,6 +85,11 @@ resource "aws_iam_user_policy" "lambda_function_deploy_policy" {
     ]
 }
 EOF
+}
+
+resource "aws_iam_access_key" "email_sender_lambda_deploy" {
+  user    = aws_iam_user.email_sender_lambda_deploy.name
+  pgp_key = var.pgp_key
 }
 
 output "secret" {
